@@ -1,22 +1,13 @@
-# Unittestwebautoamtion
-This project demonstrates Web automation testing for QS website using Python Selenium
-1.Project Overview
-   - Project Name: QS Web Automation Test
-   - Objective: Automate web application testing using Selenium
-   - Description: This project demonstrates Web automation testing for QS website using Python Selenium
+    def launch_chrome(self,url):
+        options = Options()
+        options.add_experimental_option("detach", True)
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        self.driver.maximize_window()
+        self.driver.get(url)
 
-2.Prerequisites
-   -Python installed 
-   - PyCharm to be installed
-   - Selenium WebDriver installed
-   - Chrome browser installed
+    def handle_browser_cookies(self):
 
-3.Execution
-   - Run test cases using Unittest
-   - View results in PyCharm console
-
-4.Technical Details
-   - Tool Used: Selenium WebDriver
-   - Programming Language: Python
-   - Testing Framework: Unittest
-   - Browser: Chrome
+        accept_button = WebDriverWait(self.driver, 10).until(
+            expected_conditions.element_to_be_clickable((By.ID, "hs-eu-confirmation-button")))
+        self.driver.execute_script("arguments[0].scrollIntoView();", accept_button)
+        self.driver.execute_script("arguments[0].click();", accept_button)
